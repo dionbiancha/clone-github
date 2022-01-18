@@ -83,8 +83,22 @@ export const ForkIcon = styled(AiOutlineFork)`
 
 export const LinkButton = styled.a`
   margin-top: 24px;
+  text-decoration: none;
   background: var(--gray-dark);
   padding: 12px 17px;
+  border-radius: 24px;
+  width: max-content;
+
+  display: flex;
+  align-items: center;
+
+  > span {
+    color: var(--primary);
+  }
+  > svg {
+    fill: var(--primary);
+    margin-right: 10px;
+  }
 `;
 
 export const GithubIcon = styled(FaGithub)`
