@@ -42,9 +42,12 @@ const Profile: React.FC = () => {
       const user = await userResponse.json();
       const repos = await reposResponse.json();
 
+      const shuffledRepos = repos.sort(() => 0.5 - Math.random());
+      const slicedRepos = shuffledRepos.slice(0, 6);
+
       setData({
         user,
-        repos,
+        repos: slicedRepos,
       });
     });
   }, [username]);
@@ -60,7 +63,7 @@ const Profile: React.FC = () => {
     <div className="content">
       <RepoIcon />
       <span className="label">Repositórios</span>
-      <span className="number">{data.user.public_repos}</span>
+      <span className="number">{data.user?.public_repos}</span>
     </div>
   );
 
@@ -76,15 +79,15 @@ const Profile: React.FC = () => {
       <Main>
         <LeftSide>
           <ProfileData
-            username={"dionbiancha"}
-            name={"Dionei Bianchati"}
-            avatarUrl={"https://avatars.githubusercontent.com/u/47863625?v=4"}
-            followers={965}
-            following={34}
-            company={"Freelancer"}
-            location={"Missal, Brazil"}
-            email={"contato@dionei.com"}
-            blog={"dionei.com"}
+            username={data.user.login}
+            name={data.user.name}
+            avatarUrl={data.user.avatar_url}
+            followers={data.user.followers}
+            following={data.user.following}
+            company={data.user.company}
+            location={data.user.location}
+            email={data.user.email}
+            blog={data.user.blog}
           />
         </LeftSide>
         <RightSide>
@@ -95,15 +98,15 @@ const Profile: React.FC = () => {
           <Repos>
             <h2>Random Repos</h2>
             <div>
-              {[1, 2, 3, 4, 5, 6].map((n) => (
+              {data.repos.map((item) => (
                 <RepoCard
-                  key={n}
-                  username={"dionbiancha"}
-                  reponame={"youtube-content"}
-                  description={"Contains all of my YouTube lessons code"}
-                  language={n % 3 === 0 ? "Javascript" : "TypeScript"}
-                  stars={8}
-                  forks={4}
+                  key={item.name}
+                  username={item.owner.login}
+                  reponame={item.name}
+                  description={item.description}
+                  language={item.language}
+                  stars={item.stargazers_count}
+                  forks={item.forks}
                 />
               ))}
             </div>
