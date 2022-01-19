@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { FaGithub } from 'react-icons/fa';
+import styled from "styled-components";
+import { FaGithub } from "react-icons/fa";
 
 export const Container = styled.div`
   display: flex;
@@ -14,6 +14,11 @@ export const GithubLogo = styled(FaGithub)`
   height: 32px;
   //Nao permite que a logo fique "amassada" ao redimensionar
   flex-shrink: 0;
+
+  cursor: pointer;
+  &.hover {
+    opacity: 0.8;
+  }
 `;
 
 export const SearchForm = styled.form`
